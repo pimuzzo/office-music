@@ -8,6 +8,6 @@ Simple redis-cli wrapper to play music from youtube
 - `nohup ./server.sh &`
 
 ## on client:
-- install: `redis-tools`
+- install with package manager: `redis-tools`
 - `./client.sh https://www.youtube.com/watch?v=dQw4w9WgXcQ`
 
