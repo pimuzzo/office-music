@@ -7,7 +7,11 @@ REDIS_HOST=localhost
 while true; do 
   CURRENT_SONG=$(redis-cli -h "$REDIS_HOST" RPOP current_song)
   if [ "$CURRENT_SONG" != "" ]; then
-    youtube-dl --extract-audio --audio-format best --output "current_song.%(ext)s" "$CURRENT_SONG" && omxplayer -o both current_song.opus
+    youtube-dl --extract-audio --audio-format best --output "current_song.%(ext)s" "$CURRENT_SONG"
+    omxplayer -o both current_song.*
+    rm current_song.*
+  else
+    sleep 1s
   fi
 done
 
