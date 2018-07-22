@@ -2,17 +2,29 @@ const BASE_WEBDIS_URL = 'http://raspberry:7379/LPUSH/current_song/';
 const ESCAPED_YOUTUBE_URL = 'https:%2f%2fyoutu.be%2f';
 
 function main() {
-  const watchActionButtons = document.getElementsByClassName('watch-action-buttons')[0];
-  addOfficeMusicButton(watchActionButtons);
+  let _watch = null;
+  setInterval(function() {
+    let test = window.location.href;
+    if(_watch !== test || _watch === null) {
+      _watch = test;
+      setTimeout(waitActionButtons, 500);
+    }
+  }, 500);
 }
 
-function addOfficeMusicButton(watchActionButtons) {
+function waitActionButtons() {
+  const actionButtons = document.getElementsByClassName('watch-action-buttons')[0] || document.getElementById('info');
+  if(actionButtons) return addOfficeMusicButton(actionButtons);
+  else setTimeout(waitActionButtons, 500);
+}
+
+function addOfficeMusicButton(actionButtons) {
   const button = document.createElement('button');
   button.className = 'yt-uix-button yt-uix-button-size-default yt-uix-button-opacity yt-uix-button-has-icon no-icon-markup action-panel-trigger-share';
   const buttonText = document.createTextNode('office music');
   button.appendChild(buttonText);
   button.onclick = sendRequestToWebdis;
-  watchActionButtons.appendChild(button);
+  actionButtons.appendChild(button);
 }
 
 function sendRequestToWebdis() {
