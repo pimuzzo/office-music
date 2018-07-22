@@ -13,13 +13,16 @@ function main() {
 }
 
 function waitActionButtons() {
-  const actionButtons = document.getElementsByClassName('watch-action-buttons')[0] || document.getElementById('info');
+  const actionButtons = document.getElementsByClassName('watch-action-buttons')[0] || document.getElementById('container');
   if(actionButtons) return addOfficeMusicButton(actionButtons);
   else setTimeout(waitActionButtons, 500);
 }
 
 function addOfficeMusicButton(actionButtons) {
+  const oldButton = document.getElementById('office-music');
+  if(oldButton) return;
   const button = document.createElement('button');
+  button.id = 'office-music';
   button.className = 'yt-uix-button yt-uix-button-size-default yt-uix-button-opacity yt-uix-button-has-icon no-icon-markup action-panel-trigger-share';
   const buttonText = document.createTextNode('office music');
   button.appendChild(buttonText);
