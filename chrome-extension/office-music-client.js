@@ -1,5 +1,6 @@
 const BASE_WEBDIS_URL = 'http://raspberry:7379/LPUSH/current_song/';
 const ESCAPED_YOUTUBE_URL = 'https:%2f%2fyoutu.be%2f';
+const YOUTUBE_MATCH = 'https://www.youtube.com/watch';
 
 function main() {
   let _watch = null;
@@ -7,27 +8,26 @@ function main() {
     let test = window.location.href;
     if(_watch !== test || _watch === null) {
       _watch = test;
-      setTimeout(waitActionButtons, 500);
+      if(test.startsWith(YOUTUBE_MATCH)) setTimeout(addOfficeMusicButton, 500);
+      else {
+        const oldButton = document.getElementById('office-music');
+        if(oldButton) oldButton.remove();
+      }
     }
   }, 500);
 }
 
-function waitActionButtons() {
-  const actionButtons = document.getElementsByClassName('watch-action-buttons')[0] || document.getElementById('container');
-  if(actionButtons) return addOfficeMusicButton(actionButtons);
-  else setTimeout(waitActionButtons, 500);
-}
-
-function addOfficeMusicButton(actionButtons) {
+function addOfficeMusicButton() {
+  const body = document.getElementsByTagName('body')[0];
   const oldButton = document.getElementById('office-music');
   if(oldButton) return;
   const button = document.createElement('button');
   button.id = 'office-music';
-  button.className = 'yt-uix-button yt-uix-button-size-default yt-uix-button-opacity yt-uix-button-has-icon no-icon-markup action-panel-trigger-share';
+  button.setAttribute('style', 'position:fixed;bottom:30px;right:30px;');
   const buttonText = document.createTextNode('office music');
   button.appendChild(buttonText);
   button.onclick = sendRequestToWebdis;
-  actionButtons.appendChild(button);
+  body.appendChild(button);
 }
 
 function sendRequestToWebdis() {
