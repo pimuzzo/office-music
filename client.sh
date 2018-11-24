@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Start config
-REDIS_HOST=raspberry
+# Start config - define your customizations inside .env.local
+source .env
 # End config
 
 if [ -z "$1" ]; then
@@ -9,5 +9,5 @@ if [ -z "$1" ]; then
   exit 1;
 fi
 
-redis-cli -h "$REDIS_HOST" LPUSH current_song "$1"
+redis-cli -h "$CLIENT_REDIS_HOST" LPUSH current_song "$1"
 
