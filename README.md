@@ -11,3 +11,6 @@ Simple redis-cli wrapper to play music from youtube
 - install with package manager: `redis-tools`
 - `./client.sh https://www.youtube.com/watch?v=dQw4w9WgXcQ`
 
+## override environment variables:
+- you can override environment variables inside `.env` creating your own `.env.local` file
+
