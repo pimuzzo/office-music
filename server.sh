@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Start config - define your customizations inside .env.local
-source .env
+source "$(dirname "$0")/.env"
 # End config
 
 while true; do 
