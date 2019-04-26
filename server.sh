@@ -7,9 +7,7 @@ source "$(dirname "$0")/.env"
 while true; do 
   CURRENT_SONG=$(redis-cli -h "$SERVER_REDIS_HOST" RPOP current_song)
   if [ "$CURRENT_SONG" != "" ]; then
-    youtube-dl --extract-audio --audio-format best --output "current_song.%(ext)s" "$CURRENT_SONG"
-    omxplayer -o "$SERVER_OMX_AUDIO_OUT_DEVICE" current_song.*
-    rm current_song.*
+    youtube-dl -f bestaudio -i --output "songs/%(epoch)s.%(id)s.%(ext)s" "$CURRENT_SONG"
   else
     sleep 1s
   fi
