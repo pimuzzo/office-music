@@ -16,6 +16,6 @@ while true; do
       rm -f "$filename"
     fi
   done
-  sleep 1
+  sleep 1s
 done
 
