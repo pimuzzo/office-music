@@ -1,0 +1,31 @@
+{
+  "name": "Office music",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "Office music client chrome plugin",
+  "icons": {
+    "16": "office-music.png",
+    "48": "office-music.png",
+    "128": "office-music.png"
+  },
+  "permissions": [
+    "activeTab",
+    "http://raspberry:7379/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch*"
+      ],
+      "js": [
+        "office-music-client.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  }
+}
