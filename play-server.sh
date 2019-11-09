@@ -12,7 +12,13 @@ while true; do
     if [[ $file != "songs/*" && ${file: -5} != ".part" ]]; then
       filename=${file}
       echo "Playing $filename..."
-      omxplayer -o "$SERVER_OMX_AUDIO_OUT_DEVICE" "$filename"
+
+      if [ "$OFFICE_MUSIC_BACKEND" == "local" ]; then
+        omxplayer -o "$SERVER_OMX_AUDIO_OUT_DEVICE" "$filename"
+      else
+        ffmpeg -re -i "$filename" -vn -codec:a libmp3lame -b:a 64k -f mp3 -content_type audio/mpeg -ice_name "$SERVER_ICECAST2_NAME" -ice_description "$SERVER_ICECAST2_DESCRIPTION" icecast://source:"$COMPOSE_ICECAST2_SOURCE_PASSWORD"@"$SERVER_ICECAST2_HOST":"$SERVER_ICECAST2_PORT"/"$SERVER_ICECAST2_MOUNTPOINT"
+      fi
+
       rm -f "$filename"
     fi
   done
