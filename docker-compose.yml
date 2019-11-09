@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  redis:
+    container_name: redis
+    image: redis:5-alpine
+    command: ${COMPOSE_REDIS_COMMAND}
+    ports:
+      - 6379:6379
+  icecast2:
+    container_name: icecast2
+    image: infiniteproject/icecast
+    ports:
+      - 8000:8000
+    environment:
+      ICECAST_SOURCE_PASSWORD: ${SERVER_ICECAST2_SOURCE_PASSWORD}
+      ICECAST_ADMIN_USERNAME: ${COMPOSE_ICECAST2_ADMIN_USERNAME}
+      ICECAST_ADMIN_PASSWORD: ${COMPOSE_ICECAST2_ADMIN_PASSWORD}
+      ICECAST_ADMIN_EMAIL: ${COMPOSE_ICECAST2_ADMIN_EMAIL}
+      ICECAST_LOCATION: ${COMPOSE_ICECAST2_LOCATION}
+      ICECAST_MAX_CLIENTS: ${COMPOSE_ICECAST2_MAX_CLIENTS}
+      ICECAST_MAX_SOURCES: ${COMPOSE_ICECAST2_MAX_SOURCES}
+
