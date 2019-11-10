@@ -9,5 +9,5 @@ if [ -z "$1" ]; then
   exit 1;
 fi
 
-redis-cli -h "$CLIENT_REDIS_HOST" LPUSH current_song "$1"
+redis-cli -h "$CLIENT_REDIS_HOST" -a "$REDIS_PASSWORD" LPUSH current_song "$1"
 
