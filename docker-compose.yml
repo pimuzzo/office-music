@@ -1,12 +1,6 @@
 version: "3"
 
 services:
-  redis:
-    container_name: redis
-    image: redis:5-alpine
-    command: ${COMPOSE_REDIS_COMMAND}
-    ports:
-      - 6379:6379
   icecast2:
     container_name: icecast2
     image: infiniteproject/icecast
