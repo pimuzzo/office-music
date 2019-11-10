@@ -11,6 +11,7 @@ Simple redis-cli wrapper to play music from YouTube
 
 ### Icecast2:
 You can enable Icecast2 support to stream your music from youtube on Icecast2 server
+- install with package manager: `ffmpeg`
 - edit `.env` to `SERVER_BACKEND=icecast2`
 - edit all the Icecast2 related block in `.env`
 
